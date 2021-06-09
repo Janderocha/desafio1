@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
+import 'homepage.dart';
 
 void main() {
   runApp(MyApp());
@@ -12,7 +14,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Design',
+      routes:{
+      '/home': (context) => HomePage()
+      },
+
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -50,6 +56,8 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
+  var email = "";
+  var password ="";
 
   void _incrementCounter() {
     setState(() {
@@ -76,60 +84,101 @@ class _MyHomePageState extends State<MyHomePage> {
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
       ),
-      body:  Stack(
+      body:  Container(
+        color: Colors.grey,
+        child: Column(
 
 
 
-            // Column is also a layout widget. It takes a list of children and
-            // arranges them vertically. By default, it sizes itself to fit its
-            // children horizontally, and tries to be as tall as its parent.
-            //
-            // Invoke "debug painting" (press "p" in the console, choose the
-            // "Toggle Debug Paint" action from the Flutter Inspector in Android
-            // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-            // to see the wireframe for each widget.
-            //
-            // Column has various properties to control how it sizes itself and
-            // how it positions its children. Here we use mainAxisAlignment to
-            // center the children vertically; the main axis here is the vertical
-            // axis because Columns are vertical (the cross axis would be
-            // horizontal).
+              // Column is also a layout widget. It takes a list of children and
+              // arranges them vertically. By default, it sizes itself to fit its
+              // children horizontally, and tries to be as tall as its parent.
+              //
+              // Invoke "debug painting" (press "p" in the console, choose the
+              // "Toggle Debug Paint" action from the Flutter Inspector in Android
+              // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
+              // to see the wireframe for each widget.
+              //
+              // Column has various properties to control how it sizes itself and
+              // how it positions its children. Here we use mainAxisAlignment to
+              // center the children vertically; the main axis here is the vertical
+              // axis because Columns are vertical (the cross axis would be
+              // horizontal).
 
-            children: <Widget>[
-              SizedBox(
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height,
-              child:Image.network('https://policies.tinder.com/static/2c82fc109c1b1aac047b67c10d1db7b8/69476/tinder_white_flame_pink_background.png', fit: BoxFit.cover,)
-              ),
-              SizedBox(
+              children: <Widget>[
+                  Expanded(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text('Nome/Título'),
+                        ],
+                      )),
 
-              child:Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children:[
-              Text(
-                'Location Changer for Tinder'
-              ),
-              Text(
-                '$_counter',
-                style: Theme.of(context).textTheme.headline4,
-              ),
-              ElevatedButton(onPressed: _incrementCounter,
-                style: ButtonStyle(
-                  foregroundColor: MaterialStateProperty.all(Colors.pink),
-                    backgroundColor: MaterialStateProperty.all(Colors.white),
-                  shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15.0),
-                    side: BorderSide(color:Colors.pinkAccent),
-                  ))
+                  Card(child:Column
+                    (children: [
+                    TextField(
+                      onChanged: (text){
+                        email = text;
+                      },
+                      keyboardType: TextInputType.emailAddress,
+                      decoration: InputDecoration(border: OutlineInputBorder(),
+
+                          labelText: 'Email')
+
+                      ,
+                    ),
+
+
+                    TextField(
+                        decoration: InputDecoration(border: OutlineInputBorder(),
+                            labelText: 'Senha'),
+                        obscureText:true,
+                        onChanged: (text){
+                          password = text;
+                        }
+                    ),
+                  ],)),
+
+
+                Expanded(
+                  child: Column(
+                    children: [
+                      ElevatedButton(onPressed:() {Navigator.of(context).pushReplacementNamed('/home');},
+
+                      style: ButtonStyle(
+                      foregroundColor: MaterialStateProperty.all(Colors.pink),
+                      backgroundColor: MaterialStateProperty.all(Colors.white),
+                      shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                      side: BorderSide(color:Colors.pinkAccent),
+                      ))
+                      ),
+                      child: Text ('Login'),
+
+                      ),
+                      ],
+                      ),
+                      ),
+
+                      Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children:[
+
+
+                Text(
+                  'Copyrights'
                 ),
-                child: Text ('Login With Facebook'),
+                Text(
+                  '$_counter',
+                  style: Theme.of(context).textTheme.headline4,
+                ),
 
-              ),
-    ],
-              ),),
-    ]
+                ],
+    ),]
 
-          ),
+
+            ),
+      ),
         );
 
 
