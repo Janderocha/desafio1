@@ -110,7 +110,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text('Nome/Título'),
+                          Image.asset('Icons/logo.png'),
                         ],
                       )),
 
@@ -146,11 +146,11 @@ class _MyHomePageState extends State<MyHomePage> {
                       ElevatedButton(onPressed:() {Navigator.of(context).pushReplacementNamed('/home');},
 
                       style: ButtonStyle(
-                      foregroundColor: MaterialStateProperty.all(Colors.pink),
+                      foregroundColor: MaterialStateProperty.all(Colors.black54),
                       backgroundColor: MaterialStateProperty.all(Colors.white),
                       shape: MaterialStateProperty.all(RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15.0),
-                      side: BorderSide(color:Colors.pinkAccent),
+                      side: BorderSide(color:Colors.redAccent),
                       ))
                       ),
                       child: Text ('Login'),
