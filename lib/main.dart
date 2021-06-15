@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
+import 'details.dart';
 import 'homepage.dart';
 
 void main() {
@@ -16,7 +17,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Design',
       routes:{
-      '/home': (context) => HomePage()
+      '/home': (context) => HomePage(),
+        '/details':(context) => Details(),
       },
 
       theme: ThemeData(
