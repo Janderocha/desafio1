@@ -16,7 +16,7 @@ List<String> images = ['https://images.unsplash.com/photo-1494500764479-0c8f2919
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text ('Página Principal'),
+        title: Text ('Página Prinicipal'),
       ),
       body:GridView.count(crossAxisCount: 3,
 
