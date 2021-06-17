@@ -36,8 +36,11 @@ class _NewNoteState extends State<NewNote>  {
         )
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: (){DBProvider.db.insertNota(new Notas(id: 90, char: 'Sol Badguy', nota:noteController.text));},
-
+        onPressed: () async {
+          setState(() {});
+         DBProvider.db.insertNota(new Notas(id: 90, char: 'Sol Badguy', nota:noteController.text));
+        Navigator.of(context).pushReplacementNamed('/details');
+  },
         child: const Icon(Icons.add),
     ),
     );

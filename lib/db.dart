@@ -67,6 +67,7 @@ class DBProvider {
       nota.toMap(),
       conflictAlgorithm: ConflictAlgorithm.replace,
     );
+
   }
 
   // A method that retrieves all the dogs from the dogs table.

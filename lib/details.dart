@@ -65,7 +65,9 @@ class _DetailsState extends State<Details>  {
                       return  ListTile(
                         title: Text(item.nota),
                         leading: Text(item.id.toString()),
-                        trailing: TextButton(onPressed: () {DBProvider.db.deleteNota(item.id);}, child: const Icon(Icons.remove)),
+                        trailing: TextButton(onPressed: () {
+                          setState(() {});
+                          DBProvider.db.deleteNota(item.id);}, child: const Icon(Icons.remove)),
 
                       );
                     }
