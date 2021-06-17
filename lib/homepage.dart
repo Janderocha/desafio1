@@ -90,7 +90,7 @@ class OpcaoCard extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){Navigator.of(context).pushNamed('/details');},
+      onTap:  () async {Navigator.of(context).pushNamed('/details');},
       child: Card(
         child:Center(
           child: Column(

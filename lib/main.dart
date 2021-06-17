@@ -5,7 +5,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'details.dart';
 import 'homepage.dart';
-
+import 'newnote.dart';
 void main() {
   runApp(MyApp());
 }
@@ -19,6 +19,7 @@ class MyApp extends StatelessWidget {
       routes:{
       '/home': (context) => HomePage(),
         '/details':(context) => Details(),
+        '/new':(context)=> NewNote(),
       },
 
       theme: ThemeData(

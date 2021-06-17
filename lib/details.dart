@@ -42,29 +42,48 @@ class Details extends StatefulWidget{
 
 }
 
-class _DetailsState extends State<Details> {
+class _DetailsState extends State<Details>  {
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text('Página Detalhes'),
-        ),
-        body: FutureBuilder<List<Notas>>(
+      appBar: new AppBar(
+        title:Text ('Notas'),
+      ),
+      body: Container(
+
+        child:  FutureBuilder<List<Notas>>(
             future: DBProvider.db.todasNotas(),
             builder: (BuildContext context,
                 AsyncSnapshot<List<Notas>> snapshot) {
-              return ListView.builder(
-                  itemCount: snapshot.data.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    Notas item = snapshot.data[index];
-                    child:
-                    ListTile(
-                      title: Text(item.nota),
-                      leading: Text(item.id.toString()),
+              if (snapshot.hasData) {
+                return Container(
 
-                    );
-                  }
+               child: ListView.builder(
+                 keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+                    itemCount: snapshot.data.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      Notas item = snapshot.data[index];
+                      return  ListTile(
+                        title: Text(item.nota),
+                        leading: Text(item.id.toString()),
+                        trailing: TextButton(onPressed: () {DBProvider.db.deleteNota(item.id);}, child: const Icon(Icons.remove)),
+
+                      );
+                    }
+                ),
               );
-            })
+              }else{
+                return CircularProgressIndicator();
+              }
+            }
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: (){Navigator.of(context).pushNamed('/new');},
+        child: const Icon(Icons.add),
+      ),
     );
   }
-}
+
+
+  }
+

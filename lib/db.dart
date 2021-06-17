@@ -23,6 +23,7 @@ class DBProvider {
 
     // if _database is null we instantiate it
     _database = await initDB();
+
     return _database;
   }
 
@@ -35,18 +36,21 @@ class DBProvider {
       // Set the path to the database. Note: Using the `join` function from the
       // `path` package is best practice to ensure the path is correctly
       // constructed for each platform.
-      join(await getDatabasesPath(), 'notas_database.db'),
+      join(await getDatabasesPath(), 'notas.db'),
       // When the database is first created, create a table to store dogs.
       onCreate: (db, version) {
         // Run the CREATE TABLE statement on the database.
-        return db.execute(
+         db.execute(
           'CREATE TABLE notas(id INTEGER PRIMARY KEY, char TEXT, nota TEXT)',
         );
+
       },
       // Set the version. This executes the onCreate function and provides a
       // path to perform database upgrades and downgrades.
       version: 1,
     );
+
+    return database;
   }
 
   // Define a function that inserts dogs into the database
@@ -66,23 +70,25 @@ class DBProvider {
   }
 
   // A method that retrieves all the dogs from the dogs table.
-  todasNotas() async {
-    // Get a reference to the database.
-    final db = await database;
+ Future<List<Notas>> todasNotas() async {
+   // Get a reference to the database.
+   final db = await database;
+   //insertNota(new Notas(id:1, char: "Sol Badguy", nota:"UNGA BUNGA"));
 
-    // Query the table for all The Dogs.
-    final List<Map<String, dynamic>> maps = await db.query('notas');
+   // Query the table for all The Dogs.
 
-    // Convert the List<Map<String, dynamic> into a List<Dog>.
-    return List.generate(maps.length, (i) {
-      return Notas(
-        id: maps[i]['id'],
-        char: maps[i]['char'],
-        nota: maps[i]['nota'],
-      );
-    });
-  }
+   final List<Map<String, dynamic>> maps = await db.rawQuery(
+       'SELECT * FROM notas');
 
+   // Convert the List<Map<String, dynamic> into a List<Dog>.
+   return List.generate(maps.length, (i) {
+     return Notas(
+       id: maps[i]['id'],
+       char: maps[i]['char'],
+       nota: maps[i]['nota'],
+     );
+   });
+ }
 
   updateNota(Notas nota) async {
     // Get a reference to the database.
