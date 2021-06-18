@@ -4,6 +4,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 
+import 'todas.dart';
+
 class HomePage extends StatefulWidget{
   @override
   _HomePageState createState() => _HomePageState();
@@ -71,7 +73,7 @@ const List<Opcao> opcoes = const <Opcao>[
   const Opcao("Ramlethal Valentine", 'Icons/Ramlethal_Valentine.png'),
   const Opcao("Sol Badguy", 'Icons/Sol_Badguy.png'),
   const Opcao("Zato-I", 'Icons/Zato-1.png'),
-
+  const Opcao("Todas as notas",  'Icons/ggst.png')
 
 
 
@@ -90,12 +92,21 @@ class OpcaoCard extends StatelessWidget{
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap:  () async {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => Details(char: this.opcao.titulo ),
-          ),
-        );
+        if(this.opcao.titulo != "Todas as notas") {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => Details(char: this.opcao.titulo),
+            ),
+          );
+        } else{
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+              builder: (context) => Todas()
+        ),
+          );
+      };
       },
       child: Card(
         color: Colors.grey,

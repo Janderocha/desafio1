@@ -4,60 +4,35 @@ import 'package:flutter/painting.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 import 'db.dart';
+import 'details.dart';
 import 'newnote.dart';
 
-class Notas{
-  final int id;
-  final String char;
-  final String nota;
-
-  Notas({
-     this.id,
-     this.char,
-     this.nota,
-  });
-
-  Map<String, dynamic> toMap() {
-    return {
-      'id': id,
-      'char': char,
-      'nota': nota,
-    };
-  }
-
-
-  // Implement toString to make it easier to see information about
-  // each dog when using the print statement.
-  @override
-  String toString() {
-    return 'Notas{id: $id, char: $char, nota: $nota}';
-  }
-}
 
 
 
-class Details extends StatefulWidget{
-  final  String char;
 
-  Details({Key key, @required this.char}) : super(key: key);
+
+class Todas extends StatefulWidget{
+
+
 
   @override
-  _DetailsState createState() => _DetailsState();
+  _TodasState createState() => _TodasState();
 
 
 }
 
-class _DetailsState extends State<Details>  {
+class _TodasState extends State<Todas>  {
 
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: new AppBar(
-        title:Text ('Notas de ' + widget.char),
+        title:Text ('Todas as Notas '),
       ),
       body: Container(
 
         child:  FutureBuilder<List<Notas>>(
-            future: DBProvider.db.charNotas(widget.char),
+            future: DBProvider.db.todasNotas(),
             builder: (BuildContext context,
                 AsyncSnapshot<List<Notas>> snapshot) {
               if (snapshot.hasData) {
@@ -86,17 +61,7 @@ class _DetailsState extends State<Details>  {
             }
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: ()async {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => NewNote(char: widget.char ),
-        ),
-      );
-    },
-        child: const Icon(Icons.add),
-      ),
+
     );
   }
 

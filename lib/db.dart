@@ -96,7 +96,9 @@ class DBProvider {
     // Get a reference to the database.
     final db = await database;
     //insertNota(new Notas(id:1, char: "Sol Badguy", nota:"UNGA BUNGA"));
-
+    if (char == 'Todas as notas'){
+      char = 'char';
+    }
     // Query the table for all The Dogs.
 
     final List<Map<String, dynamic>> maps = await db.query('notas',
