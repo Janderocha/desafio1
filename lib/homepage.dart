@@ -109,7 +109,7 @@ class OpcaoCard extends StatelessWidget{
       };
       },
       child: Card(
-        color: Colors.grey,
+        color: Colors.white,
         child:Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
