@@ -117,30 +117,6 @@ class _MyHomePageState extends State<MyHomePage> {
                         ],
                       )),
 
-                  Card(child:Column
-                    (children: [
-                    TextField(
-                      onChanged: (text){
-                        email = text;
-                      },
-                      keyboardType: TextInputType.emailAddress,
-                      decoration: InputDecoration(border: OutlineInputBorder(),
-
-                          labelText: 'Email')
-
-                      ,
-                    ),
-
-
-                    TextField(
-                        decoration: InputDecoration(border: OutlineInputBorder(),
-                            labelText: 'Senha'),
-                        obscureText:true,
-                        onChanged: (text){
-                          password = text;
-                        }
-                    ),
-                  ],)),
 
 
                 Expanded(
@@ -156,7 +132,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       side: BorderSide(color:Colors.redAccent),
                       ))
                       ),
-                      child: Text ('Login'),
+                      child: Text ('Entrar'),
 
                       ),
                       ],
@@ -171,10 +147,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 Text(
                   'Copyrights'
                 ),
-                Text(
-                  '$_counter',
-                  style: Theme.of(context).textTheme.headline4,
-                ),
+
 
                 ],
     ),]

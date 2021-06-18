@@ -9,6 +9,11 @@ import 'details.dart';
 TextEditingController noteController = new TextEditingController();
 
 class NewNote extends StatefulWidget{
+  final String char;
+
+  const NewNote({Key key, this.char}) : super(key: key);
+
+
   @override
   _NewNoteState createState() => _NewNoteState();
 
@@ -19,7 +24,7 @@ class _NewNoteState extends State<NewNote>  {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: new AppBar(
-        title:Text ('Notas'),
+        title:Text ('Nova Nota'),
       ),
       body: Container(
 
@@ -38,9 +43,15 @@ class _NewNoteState extends State<NewNote>  {
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
           setState(() {});
-         DBProvider.db.insertNota(new Notas(id: 90, char: 'Sol Badguy', nota:noteController.text));
-        Navigator.of(context).pushReplacementNamed('/details');
-  },
+         DBProvider.db.insertNota(new Notas(char: widget.char, nota:noteController.text));
+         noteController.text = ""; //PROCURAR MANEIRA DE LIMPAR ESSA VARIAVEL DEPOIS.
+         Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => Details(char: widget.char ),
+              ),
+            );
+          },
         child: const Icon(Icons.add),
     ),
     );

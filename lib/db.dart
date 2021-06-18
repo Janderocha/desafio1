@@ -41,7 +41,7 @@ class DBProvider {
       onCreate: (db, version) {
         // Run the CREATE TABLE statement on the database.
          db.execute(
-          'CREATE TABLE notas(id INTEGER PRIMARY KEY, char TEXT, nota TEXT)',
+          'CREATE TABLE notas(id INTEGER PRIMARY KEY autoincrement, char TEXT, nota TEXT)',
         );
 
       },
@@ -90,6 +90,34 @@ class DBProvider {
      );
    });
  }
+
+  // A method that retrieves all the dogs from the dogs table.
+  Future<List<Notas>> charNotas(String char) async {
+    // Get a reference to the database.
+    final db = await database;
+    //insertNota(new Notas(id:1, char: "Sol Badguy", nota:"UNGA BUNGA"));
+
+    // Query the table for all The Dogs.
+
+    final List<Map<String, dynamic>> maps = await db.query('notas',
+      // Use a `where` clause to delete a specific dog.
+      where: 'char = ?',
+      // Pass the Dog's id as a whereArg to prevent SQL injection.
+      whereArgs: [char],
+    );
+
+
+
+    // Convert the List<Map<String, dynamic> into a List<Dog>.
+    return List.generate(maps.length, (i) {
+      return Notas(
+        id: maps[i]['id'],
+        char: maps[i]['char'],
+        nota: maps[i]['nota'],
+      );
+    });
+  }
+
 
   updateNota(Notas nota) async {
     // Get a reference to the database.

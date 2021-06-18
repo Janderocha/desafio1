@@ -4,6 +4,7 @@ import 'package:flutter/painting.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 import 'db.dart';
+import 'newnote.dart';
 
 class Notas{
   final int id;
@@ -36,6 +37,10 @@ class Notas{
 
 
 class Details extends StatefulWidget{
+  final  String char;
+
+  Details({Key key, @required this.char}) : super(key: key);
+
   @override
   _DetailsState createState() => _DetailsState();
 
@@ -43,15 +48,16 @@ class Details extends StatefulWidget{
 }
 
 class _DetailsState extends State<Details>  {
+
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: new AppBar(
-        title:Text ('Notas'),
+        title:Text ('Notas:' + widget.char),
       ),
       body: Container(
 
         child:  FutureBuilder<List<Notas>>(
-            future: DBProvider.db.todasNotas(),
+            future: DBProvider.db.charNotas(widget.char),
             builder: (BuildContext context,
                 AsyncSnapshot<List<Notas>> snapshot) {
               if (snapshot.hasData) {
@@ -80,7 +86,14 @@ class _DetailsState extends State<Details>  {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: (){Navigator.of(context).pushNamed('/new');},
+        onPressed: ()async {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => NewNote(char: widget.char ),
+        ),
+      );
+    },
         child: const Icon(Icons.add),
       ),
     );

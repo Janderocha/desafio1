@@ -1,3 +1,5 @@
+
+import 'package:desafio1/details.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
@@ -18,7 +20,9 @@ List<String> images = ['https://images.unsplash.com/photo-1494500764479-0c8f2919
       appBar: AppBar(
         title: Text ('Página Prinicipal'),
       ),
-      body:GridView.count(crossAxisCount: 3,
+      body:
+
+      GridView.count(crossAxisCount: 3,
 
 
       children: List.generate(opcoes.length, (index) {
@@ -30,16 +34,11 @@ List<String> images = ['https://images.unsplash.com/photo-1494500764479-0c8f2919
 
 
       )
+    );
 
 
 
 
-
-      ,
-
-
-
-      );
 
   
 
@@ -90,11 +89,19 @@ class OpcaoCard extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap:  () async {Navigator.of(context).pushNamed('/details');},
+      onTap:  () async {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => Details(char: this.opcao.titulo ),
+          ),
+        );
+      },
       child: Card(
+        color: Colors.grey,
         child:Center(
           child: Column(
-
+            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
 
               Image.asset(opcao.iconepath),
