@@ -52,7 +52,7 @@ class _DetailsState extends State<Details>  {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: new AppBar(
-        title:Text ('Notas:' + widget.char),
+        title:Text ('Notas de ' + widget.char),
       ),
       body: Container(
 
@@ -69,6 +69,7 @@ class _DetailsState extends State<Details>  {
                     itemBuilder: (BuildContext context, int index) {
                       Notas item = snapshot.data[index];
                       return  ListTile(
+
                         title: Text(item.nota),
                         leading: Text(item.id.toString()),
                         trailing: TextButton(onPressed: () {
