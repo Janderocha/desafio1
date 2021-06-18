@@ -1,8 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.desafio1">
    <application
-        android:label="desafio1"
-        android:icon="@mipmap/ic_launcher">
+        android:label="GGST Notas"
+        android:icon="@mipmap/icon">
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
